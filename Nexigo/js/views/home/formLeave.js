@@ -1,5 +1,5 @@
 ﻿var nowDate = new Date();
-var date = nowDate.getDate() + '/' + (nowDate.getMonth() + 1) + '/' +  nowDate.getFullYear();
+var date = nowDate.getDate() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getFullYear();
 
 
 nexigo.widget({
@@ -103,13 +103,44 @@ nexigo.widget({
             //ROW 3
             {
                 type: 'fieldRow',
+                
                 fields: [
                     {
                         name: 'select_normal2',
                         text: 'Days',
                         type: 'select',
                         required: true,
+                        offset: 2,
                         cols: 3,
+
+                        placeholder: 'Please Select Day',
+                        data: [{
+                            value: 'days1',
+                            text: '1 Day',
+                        }, {
+                            value: 'days2',
+                            text: '0.5 Day',
+                        }, {
+                            value: 'days3',
+                            text: '0.25 Day',
+                            }
+                       
+                        ],
+
+                        onChange: function (val, text) {
+                            xg.call('Log', 'Value changed - ' + val + ' - ' + text);
+                            var pengurangan = (Date.parse(xg.serialize().EndDate) - Date.parse(xg.serialize().StartDate)) / 24 / 60 / 60 / 1000;
+                            //console.log(pengurangan)
+                            xg.populate({ DaysLeave: pengurangan });
+                        }
+                    },
+                    {
+                        name: 'select_normal2',
+                        text: 'Days',
+                        type: 'select',
+                        required: true,
+                        cols: 3,
+                        offset: 2,
                         placeholder: 'Please Select Day',
                         data: [{
                             value: 'days1',
@@ -128,7 +159,8 @@ nexigo.widget({
                             //console.log(pengurangan)
                             xg.populate({ DaysLeave: pengurangan });
                         }
-                    },
+                    }
+
                 ]
             },
             ////////////////////////-------------------------- ROW 4 --------------------------////////////////////////
@@ -142,7 +174,7 @@ nexigo.widget({
                 type: 'buttons',
                 offset: 5,
                 buttons: [
-                    { name: 'Submit', text: 'Submit', icon: 'fa-save', cssClass: 'xg-btn', action: 'Submit'  },
+                    { name: 'Submit', text: 'Submit', icon: 'fa-save', cssClass: 'xg-btn', action: 'Submit' },
                     { name: 'undo', text: 'Reset', icon: 'fa-undo', cssClass: 'xg-btn-danger', action: 'Reset' },
                 ]
             }
@@ -212,28 +244,28 @@ nexigo.widget({
         Reset: function () {
             xg.populate({ StartDate: "", EndDate: "", select_normal2: "", Remarks: "" })
         },
-    
+
     }
 
-            //xg.ajax({
-            //    url: 'http://localhost:31602/api/User/GetIDspv',
-            //    data: window.ID,
-            //    type: 'POST',
-            //    contentType: "application/json; charset=utf-8",
-            //    success: function (resultspv) {
-            //        console.log(window.ID);
-            //        console.log(resultspv);
-            //        xg.populate({ Supervisor: resultspv });
-            //        alert(resultspv);
-            //        console.log("ini getidsup harusnya blane " + resultspv);
+    //xg.ajax({
+    //    url: 'http://localhost:31602/api/User/GetIDspv',
+    //    data: window.ID,
+    //    type: 'POST',
+    //    contentType: "application/json; charset=utf-8",
+    //    success: function (resultspv) {
+    //        console.log(window.ID);
+    //        console.log(resultspv);
+    //        xg.populate({ Supervisor: resultspv });
+    //        alert(resultspv);
+    //        console.log("ini getidsup harusnya blane " + resultspv);
 
-            //    },
-            //    complete: function () {
-            //        console.log("Complete getIdSup");
-            //        xg.loading.hide();
-            //    }
-            //});
+    //    },
+    //    complete: function () {
+    //        console.log("Complete getIdSup");
+    //        xg.loading.hide();
+    //    }
+    //});
 
-        
-    
+
+
 });
