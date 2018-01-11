@@ -23,6 +23,8 @@ body .nexigo-widget, body .sg-body, body .sg-body-content {
 
 body {
     background: url('https://i2.wp.com/www.cerecdigest.net/wp-content/uploads/2017/01/free-black-polygon-vector-background-1-1.jpg') no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     font-family: Calibri,"Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
     font-size: 13px
 }
